@@ -20,6 +20,7 @@ export default function TaskForm({onAddTask}) {
         setEndDate('')
     }
   return (
+    <section className="mt-10">
     <form onSubmit={handleClick}>
         <input 
         type="text" 
@@ -44,5 +45,6 @@ export default function TaskForm({onAddTask}) {
 
         <button type="submit">Add todo</button>
     </form>
+    </section>
   )
 }

@@ -1,20 +1,20 @@
-"use client"
+import React from 'react'
+import Link from 'next/link'
 
-import { useState } from "react"
-import TaskForm from "./components/TaskForm"
-import TaskList from "./components/TaskList"
-
-export default function Home() {
-  const [tasks, setTasks] = useState([])
-
-  const handleAddTodo = (newTask) => {
-    setTasks([...tasks, newTask])
-  }
+export default function page() {
   return (
-    <main>
-      <h1>my task management app</h1>
-      <TaskForm onAddTask={handleAddTodo} />
-      <TaskList tasks={tasks} />
-    </main>
+   
+<div >
+      <h2 className='text-center text-5xl font-bold pt-40'>Simplify work and get more done.</h2>
+      <p className='text-center font-bold text-2xl mt-10'>Plan, track, and manage any type of work with project management that flexes to your team's needs.</p>
+   
+      <Link href= 'signUp'>
+            <p className=' m-auto rounded-2xl w-40 bg-blue-400 mt-20 font-medium h-[45px] hover:text-white items-center pb-5  text-2xl py-5 justify-evenly'><button className='m-auto items-center pb-3  '>Let's Start</button></p>
+            </Link>
+        
+    </div>
   )
 }
+
+
+
