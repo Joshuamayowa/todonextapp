@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid"
 import { useState } from "react"
 
+
 export default function TaskForm({onAddTask}) {
     const [taskName, setTaskName] = useState('')
     const [startDate, setStartDate] = useState('')
@@ -12,7 +13,8 @@ export default function TaskForm({onAddTask}) {
             id: uuidv4(),
             taskName,
             startDate,
-            endDate
+            endDate,
+            isDone: false,
         }
         onAddTask(newTask)
         setTaskName('')
@@ -20,31 +22,36 @@ export default function TaskForm({onAddTask}) {
         setEndDate('')
     }
   return (
-    <section className="mt-10">
+    <section className="h-[37rem] bg-[url(/office.avif)] bg-cover">
+      <div className="pt-20 text-center">
     <form onSubmit={handleClick}>
-        <input 
+        <input className="text-2xl rounded-xl text-center"
         type="text" 
         name="text" 
         placeholder="add a task"
         value={taskName} 
         onChange={(e) => setTaskName(e.target.value)}/>
 
-        <label>Start date: </label>
+        <p className="mt-5 text-2xl  hover:text-sky-100">
+        <label className="font-bold rounded-xl bg-sky-500">Start date: </label>
         <input type="date" 
         name="date"
         value={startDate}
         onChange={(e) => setStartDate(e.target.value)}
         />
-       
-       <label>End date: </label>
+       </p>
+
+       <p className="mt-5 text-2xl hover:text-sky-100">
+       <label className="font-bold rounded-xl bg-sky-500">End date: </label>
         <input type="date" 
         name="date"
         value={endDate}
         onChange={(e) => setEndDate(e.target.value)}
         />
-
-        <button type="submit">Add todo</button>
+        </p>
+        <button type="submit" className="font-bold bg-sky-600 hover:text-slate-100 mt-5 rounded-xl text-2xl">Add todo</button>
     </form>
+    </div>
     </section>
   )
 }

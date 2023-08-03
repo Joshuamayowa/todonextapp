@@ -1,13 +1,60 @@
-import React from 'react'
+import { useState } from 'react'
+import {MdDelete} from 'react-icons/md'
+import {BiPencil} from 'react-icons/bi'
 
-export default function TaskItem({task}) {
+export default function TaskItem({ task, onDeleteTask, onUpdateTask }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTaskName, setEditedTaskName] = useState(task.taskName);
+  
+    const handleDelete = () => {
+      onDeleteTask();
+    };
+  
+    const handleEditToggle = () => {
+      setIsEditing(!isEditing);
+    };
+  
+    const handleSaveEdit = () => {
+      onUpdateTask(task.id, editedTaskName);
+      setIsEditing(false);
+    };
+
   return (
     <section>
-        <h3>{task.taskName}</h3>
-        <p>Start date: {task.startDate}</p>
-        <p>End date: {task.endDate}</p>
-        <button>edit</button>
-        <button>delete</button>
+      {isEditing ? (
+        <input
+          className='text-2xl rounded-xl text-center'
+          type='text'
+          name='text'
+          value={editedTaskName}
+          onChange={(e) => setEditedTaskName(e.target.value)}
+        />
+      ) : (
+        <h3 className='text-slate-800' id={task.id}>
+          {task.taskName}
+        </h3>
+      )}
+      <p className='font-bold'>Start date: {task.startDate}</p>
+      <p className='font-bold'>End date: {task.endDate}</p>
+      <div className='items-center'>
+        {isEditing ? (
+          <button className='text-xl font-bold' onClick={handleSaveEdit}>
+            save
+          </button>
+        ) : (
+          <button className='text-xl font-bold' onClick={handleEditToggle}>
+            edit <BiPencil />
+          </button>
+        )}
+        <button className='text-xl font-bold' onClick={handleDelete}>
+          delete <MdDelete />
+        </button>
+      </div>
+
+
     </section>
   )
 }
+
+
+
