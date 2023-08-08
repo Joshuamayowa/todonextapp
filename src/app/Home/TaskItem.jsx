@@ -46,7 +46,7 @@ export default function TaskItem({ task, onDeleteTask, onUpdateTask }) {
             edit <BiPencil />
           </button>
         )}
-        <button className='text-xl font-bold' onClick={handleDelete}>
+        <button className='text-xl font-bold pl-10' onClick={handleDelete}>
           delete <MdDelete />
         </button>
       </div>

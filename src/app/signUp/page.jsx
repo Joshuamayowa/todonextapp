@@ -36,9 +36,9 @@ const Signup = () => {
     <section className='h-[37rem] bg-[url(/office.avif)] bg-cover pt-40 justify-center text-center  border-r-4 bg-slate-800'>
     <div className=''>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='font-bold'>
           <label htmlFor="username">Username:</label>
-          <input
+          <input className='text-xl rounded-xl pl-5 font-bold items-center'
             type="text"
             id="username"
             name="username"
@@ -47,9 +47,9 @@ const Signup = () => {
             onChange={handleChange}
           />
         </div>
-        <div className='mt-5'>
+        <div className='mt-5 font-bold'>
           <label htmlFor="email">Email:</label>
-          <input
+          <input className='text-xl rounded-xl pl-5 font-bold items-center'
             type="email"
             id="email"
             name="email"
@@ -58,26 +58,26 @@ const Signup = () => {
             onChange={handleChange}
           />
         </div>
-        <div className='mt-5'>
+        <div className='mt-5 font-bold'>
           <label htmlFor="password">Password:</label>
-          <input
+          <input className='text-xl rounded-xl pl-5 font-bold items-center'
             type="password"
             id="password"
             name="password"
-            placeholder='0000000000'
+            placeholder='*******'
             value={formData.password}
             onChange={handleChange}
           />
         </div>
         <div>
         <Link href="Home">
-        <button type="submit" className='bg-sky-500 text-1xl mt-5 rounded-full'>Sign Up</button>
+        <button type="submit" className='capitalize font-medium text-2xl w-40 h-[45px] rounded-2xl m-auto justify-evenly bg-blue-500 hover:bg-blue-800 content-center mt-5'>Sign Up</button>
         </Link>
         </div>
       </form>
       <p className='mt-5'>
         Already have an account?{' '}
-        <Link href="/logIn" className='hover:text-sky-400'>
+        <Link href="/logIn" className='hover:text-blue-700'>
           Login
         </Link>
       </p>
