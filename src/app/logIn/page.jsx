@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 const Login = () => {
@@ -15,7 +15,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
 
     try {
       const response = await fetch('/api/login', {
@@ -33,46 +32,53 @@ const Login = () => {
   };
 
   return (
-    <section className='h-[37rem] bg-[url(/office.avif)] bg-cover pt-40 justify-center text-center  border-r-4'>
-    <div className=''>
-      <form onSubmit={handleSubmit}>
-        <div className='mt-5 font-bold items-center texl-2xl'>
-          <label htmlFor="email">Email:</label>
-          <input className='text-xl rounded-xl pl-7 items-center m-auto'
-            type="email"
-            id="email"
-            name="email"
-            placeholder='example@gmail.com'
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mt-5 text-xl font-bold items-center '>
-          <label htmlFor="password">Password:</label>
-          <input className='text-xl rounded-xl pl-5 font-bold items-center'
-            type="password"
-            id="password"
-            name="password"
-            placeholder='********'
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </div>
-        <Link href="Home"><button type="submit" className='capitalize font-medium text-2xl w-40 h-[45px] rounded-xl m-auto justify-evenly bg-blue-600 hover:bg-blue-800  mt-5'>
-          Log In
-        </button></Link>
-      </form>
-      <p className='mt-5 text-xl'>
-        Don't have an account yet?{' '}
-        <Link href="signUp" className='hover:text-blue-700'>
-          Sign up 
-        </Link>
-      </p>
-      <div>
-        
-        
+    <section className='h-[37rem] bg-[url(/office.avif)] bg-cover pt-40 flex justify-center items-center border-r-4'>
+      <div className='bg-white p-8 rounded-lg shadow-lg w-[400px]'>
+        <form onSubmit={handleSubmit} className='space-y-5'>
+          <div className='space-y-2'>
+            <label htmlFor='email' className='text-xl font-bold'>
+              Email:
+            </label>
+            <input
+              type='email'
+              id='email'
+              name='email'
+              placeholder='example@gmail.com'
+              value={formData.email}
+              onChange={handleChange}
+              className='w-full text-xl rounded-xl pl-7 py-2 focus:outline-none focus:ring focus:border-blue-300'
+            />
+          </div>
+          <div className='space-y-2'>
+            <label htmlFor='password' className='text-xl font-bold'>
+              Password:
+            </label>
+            <input
+              type='password'
+              id='password'
+              name='password'
+              placeholder='********'
+              value={formData.password}
+              onChange={handleChange}
+              className='w-full text-xl rounded-xl pl-5 py-2 focus:outline-none focus:ring focus:border-blue-300'
+            />
+          </div>
+          <Link href='Home'>
+            <button
+              type='submit'
+              className='w-full h-[45px] text-2xl font-medium rounded-xl bg-blue-600 hover:bg-blue-800 text-white transition-colors duration-300'
+            >
+              Log In
+            </button>
+          </Link>
+        </form>
+        <p className='mt-5 text-xl'>
+          Don't have an account yet?{' '}
+          <Link href='signUp' className='hover:text-blue-700'>
+            Sign up
+          </Link>
+        </p>
       </div>
-    </div>
     </section>
   );
 };
