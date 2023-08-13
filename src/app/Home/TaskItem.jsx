@@ -24,38 +24,39 @@ export default function TaskItem({ task, onDeleteTask, onUpdateTask }) {
     <section className="border p-4 rounded-lg shadow-md mb-4">
       {isEditing ? (
         <input
-          className="w-full py-2 px-4 rounded-lg text-xl text-center border focus:outline-none focus:ring focus:border-blue-300"
+          className="w-full py-2 px-4 rounded-lg text-xl text-center border focus:outline-none focus:ring focus:border-blue-300
+            md:w-auto md:text-left"
           type="text"
           name="text"
           value={editedTaskName}
           onChange={(e) => setEditedTaskName(e.target.value)}
         />
       ) : (
-        <h3 className="text-slate-800 text-xl font-semibold mb-2">{task.taskName}</h3>
+        <h3 className="text-slate-800 text-xl font-semibold mb-2 md:text-left">{task.taskName}</h3>
       )}
-      <p className="font-semibold mb-1">Start date: {task.startDate}</p>
-      <p className="font-semibold mb-1">End date: {task.endDate}</p>
+      <p className="font-semibold mb-1 md:text-left">Start date: {task.startDate}</p>
+      <p className="font-semibold mb-1 md:text-left">End date: {task.endDate}</p>
       <div className="flex items-center">
         {isEditing ? (
           <button
-            className="text-xl font-semibold text-green-600 hover:text-green-800 mr-4"
+            className="text-xl font-semibold text-green-600 hover:text-green-800 mr-4 md:mr-2"
             onClick={handleSaveEdit}
           >
-           <FaRegSave className="inline-block ml-1"  />
+            <FaRegSave className="inline-block ml-1" />
           </button>
         ) : (
           <button
-            className="text-xl font-semibold text-blue-600 hover:text-blue-800 mr-4"
+            className="text-xl font-semibold text-blue-600 hover:text-blue-800 mr-4 md:mr-2"
             onClick={handleEditToggle}
           >
-          <BiPencil className="inline-block ml-1" />
+            <BiPencil className="inline-block ml-1" />
           </button>
         )}
         <button
-          className="text-xl font-semibold text-red-600 hover:text-red-800"
+          className="text-xl font-semibold text-red-600 hover:text-red-800 md:mr-2"
           onClick={handleDelete}
         >
-         <MdDelete className="inline-block ml-1" />
+          <MdDelete className="inline-block ml-1" />
         </button>
       </div>
     </section>
