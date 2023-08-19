@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TaskItem from './TaskItem';
 
-export default function TaskList({ tasks, onDeleteTask, onEditStartDate, onEditEndDate }) {
+export default function TaskList({ tasks, onDeleteTask, onEditStartDate, onEditEndDate, onEditTask }) {
   return (
     <section>
       {tasks.map(task => (
@@ -11,6 +11,7 @@ export default function TaskList({ tasks, onDeleteTask, onEditStartDate, onEditE
           onDeleteTask={onDeleteTask}
           onEditStartDate={onEditStartDate}
           onEditEndDate={onEditEndDate}
+          onEditTask={onEditTask}
         />
       ))}
     </section>
