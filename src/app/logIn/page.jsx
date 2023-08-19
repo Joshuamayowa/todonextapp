@@ -32,49 +32,50 @@ const Login = () => {
   };
 
   return (
-    <section className='h-[37rem] bg-[url(/office.avif)] bg-cover pt-40 flex justify-center items-center border-r-4'>
-      <div className='bg-white p-8 rounded-lg shadow-lg w-[400px]'>
-        <form onSubmit={handleSubmit} className='space-y-5'>
-          <div className='space-y-2'>
-            <label htmlFor='email' className='text-xl font-bold'>
+    <section className="h-screen flex justify-center items-center bg-gray-100">
+      <div className="bg-white p-6 rounded shadow-md w-96">
+        <h2 className="text-2xl font-semibold mb-4">Log In</h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <label htmlFor="email" className="block text-xl font-bold">
               Email:
             </label>
             <input
-              type='email'
-              id='email'
-              name='email'
-              placeholder='example@gmail.com'
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@gmail.com"
               value={formData.email}
               onChange={handleChange}
-              className='w-full text-xl rounded-xl pl-7 py-2 focus:outline-none focus:ring focus:border-blue-300'
+              className="w-full px-3 py-2 border rounded"
             />
           </div>
-          <div className='space-y-2'>
-            <label htmlFor='password' className='text-xl font-bold'>
+          <div className="space-y-2">
+            <label htmlFor="password" className="block text-xl font-bold">
               Password:
             </label>
             <input
-              type='password'
-              id='password'
-              name='password'
-              placeholder='********'
+              type="password"
+              id="password"
+              name="password"
+              placeholder="********"
               value={formData.password}
               onChange={handleChange}
-              className='w-full text-xl rounded-xl pl-5 py-2 focus:outline-none focus:ring focus:border-blue-300'
+              className="w-full px-3 py-2 border rounded"
             />
           </div>
-          <Link href='Home'>
+          <Link href="Home">
             <button
-              type='submit'
-              className='w-full h-[45px] text-2xl font-medium rounded-xl bg-blue-600 hover:bg-blue-800 text-white transition-colors duration-300'
+              type="submit"
+              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
             >
               Log In
             </button>
           </Link>
         </form>
-        <p className='mt-5 text-xl'>
+        <p className="mt-5 text-xl">
           Don't have an account yet?{' '}
-          <Link href='signUp' className='hover:text-blue-700'>
+          <Link href="signUp" className="text-blue-500 hover:text-blue-700">
             Sign up
           </Link>
         </p>
