@@ -27,16 +27,16 @@ export default function Navbar() {
 
       <ul className={`md:flex md:space-x-10 ${isMenuOpen ? 'block' : 'hidden'} md:mt-0 md:mb-0`}>
         <li className='mt-4 md:mt-0'>
-          <Link href='Contact'>
+          <Link href='contactUs'>
             <button className='block font-light text-xl hover:bg-blue-100 text-white hover:text-blue-500 rounded-lg md:w-32 capitalize'>
-              contact us
+              Contact Us
             </button>
           </Link>
         </li>
         <li className='mt-4 md:mt-0 pr-5'>
-          <Link href='Signup'>
+          <Link href='signUp'>
             <button className='block font-medium text-xl rounded-3xl md:w-32 text-center text-white bg-blue-500 hover:bg-blue-700 capitalize'>
-              let's start
+              Let's Start
             </button>
           </Link>
         </li>
