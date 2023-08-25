@@ -1,19 +1,27 @@
 import React from 'react';
 import TaskItem from './TaskItem';
 
-export default function TaskList({ tasks, onDeleteTask, onEditStartDate, onEditEndDate, onEditTask }) {
-  return (
-    <section>
-      {tasks.map(task => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          onDeleteTask={onDeleteTask}
-          onEditStartDate={onEditStartDate}
-          onEditEndDate={onEditEndDate}
-          onEditTask={onEditTask}
-        />
-      ))}
-    </section>
-  );
-}
+const TaskList = ({ tasks, onEditTask, onDeleteTask }) => {
+    const handleDeleteTask = (taskId) => {
+        onDeleteTask(taskId);
+    };
+
+    const handleEditTask = (taskId, updatedTaskName) => {
+        onEditTask(taskId, updatedTaskName);
+    };
+
+    return (
+        <section className="space-y-4">
+            {tasks.map((task) => (
+                <TaskItem
+                    key={task.id}
+                    task={task}
+                    onEditTask={handleEditTask}
+                    onDeleteTask={handleDeleteTask}
+                />
+            ))}
+        </section>
+    );
+};
+
+export default TaskList;

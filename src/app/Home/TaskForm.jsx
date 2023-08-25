@@ -1,95 +1,83 @@
-import React, { useState } from "react";
+"use client"
 import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
 export default function TaskForm({ onAddTask }) {
-  const [taskName, setTaskName] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [priority, setPriority] = useState("low");
+    const [taskName, setTaskName] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [taskPriority, setTaskPriority] = useState("");
 
-  const priorities = ["low", "medium", "high"];
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    const newTask = {
-      id: uuidv4(),
-      taskName,
-      startDate,
-      endDate,
-      priority,
-      isDone: false,
+    const handleClick = (e) => {
+        e.preventDefault();
+        const newTask = {
+            id: uuidv4(),
+            taskName,
+            startDate,
+            endDate,
+            taskPriority
+        };
+        
+        localStorage.setItem("newTask", JSON.stringify(newTask));
+        onAddTask(newTask);
+        setTaskName("");
+        setStartDate("");
+        setEndDate("");
+        setTaskPriority("");
     };
-    onAddTask(newTask);
-    setTaskName("");
-    setStartDate("");
-    setEndDate("");
-    setPriority("low");
-  };
 
-  return (
-    <section className="h-[37rem] bg-[url(/office.avif)] bg-cover">
-      <div className="pt-20 text-center">
-        <form onSubmit={handleClick} className="space-y-5">
-          <input
-            className="text-2xl rounded-xl text-center px-4 py-2 bg-white"
-            type="text"
-            name="text"
-            placeholder="Add a task"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
-          />
-
-          <div className="flex space-x-5 pl-10">
-            <label className="text-xl font-bold rounded-xl bg-blue-500 px-4 py-2">
-              Start date:
-            </label>
-            <input
-              type="date"
-              name="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="rounded-xl py-2 px-4 bg-white"
+    return (
+        <form onSubmit={handleClick} className="p-4 bg-slate-200 rounded-lg shadow-md">
+            <input 
+                type="text" 
+                name="text" 
+                placeholder="Add a task"
+                value={taskName} 
+                onChange={(e) => setTaskName(e.target.value)}
+                className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring focus:border-blue-700"
             />
-          </div>
 
-          <div className="flex space-x-5 pl-10">
-            <label className="text-xl font-bold rounded-xl bg-blue-500 px-4 py-2 w-36">
-              End date:
-            </label>
-            <input
-              type="date"
-              name="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="rounded-xl py-2 px-4 bg-white"
-            />
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="flex items-center">
+                    <label className="mr-2">Start date: </label>
+                    <input 
+                        type="date" 
+                        name="date"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        className="p-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-700"
+                    />
+                </div>
+                <div className="flex items-center">
+                    <label className="mr-2">End date: </label>
+                    <input 
+                        type="date" 
+                        name="date"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        className="p-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-700"
+                    />
+                </div>
+            </div>
 
-          <div className="flex space-x-5 text-center">
-            <label className="text-xl font-bold rounded-xl bg-blue-500 px-4 py-2 w-36 pl-10">
-              Priority:
-            </label>
-            <select
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
-              className="bg-white rounded-xl py-2 px-4"
+            <div className="flex mb-4">
+                <label className="mr-2">Priority: </label>
+                <select 
+                    name="priority" 
+                    onChange={(e) => setTaskPriority(e.target.value)}
+                    className="p-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                >
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+
+            <button 
+                type="submit" 
+                className="px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-600 w-full"
             >
-              {priorities.map((priorityOption) => (
-                <option key={priorityOption} value={priorityOption}>
-                  {priorityOption}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="font-bold bg-blue-600 hover:text-blue-100 mt-5 rounded-2xl w-36 text-2xl py-2"
-          >
-            Add Todo
-          </button>
+                Create Task
+            </button>
         </form>
-      </div>
-    </section>
-  );
+    );
 }

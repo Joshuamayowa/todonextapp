@@ -1,98 +1,109 @@
 import React, { useState } from 'react';
-import { BsPencil } from 'react-icons/bs';
-import { MdDelete, MdSaveAs } from 'react-icons/md';
-import { ImCancelCircle } from 'react-icons/im';
+import { BsFillPencilFill } from 'react-icons/bs';
+import { MdDelete } from 'react-icons/md';
+import { BsSaveFill } from 'react-icons/bs';
+import { GiCancel } from 'react-icons/gi';
 
-export default function TaskItem({ task, onDeleteTask, onEditStartDate, onEditEndDate, onEditTask }) {
-  const [editing, setEditing] = useState(false);
-  const [editedStartDate, setEditedStartDate] = useState(task.startDate);
-  const [editedEndDate, setEditedEndDate] = useState(task.endDate);
+export default function TaskItem({ task, onEditTask, onDeleteTask }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTask, setEditedTask] = useState({ ...task });
 
-  const handleEditToggle = () => {
-    setEditing(!editing);
-  };
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
 
-  const handleEditStartDate = () => {
-    onEditStartDate(task.id, editedStartDate);
-    setEditing(false);
-  };
+    const handleSaveClick = () => {
+        onEditTask(editedTask);
+        setIsEditing(false);
+    };
 
-  const handleEditEndDate = () => {
-    onEditEndDate(task.id, editedEndDate);
-    setEditing(false);
-  };
+    const handleCancelClick = () => {
+        setIsEditing(false);
+    };
 
-  const handleEditTask = () => {
-    onEditTask(task.id, editedStartDate, editedEndDate, editedTaskName);
-    setEditing(false);
-  };
+    const handleDeleteClick = () => {
+        onDeleteTask(task.id);
+    };
 
-  const handleDelete = () => {
-    onDeleteTask(task.id);
-  };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setEditedTask((prevTask) => ({
+            ...prevTask,
+            [name]: value,
+        }));
+    };
 
-  return (
-    <section className="p-4 border rounded-md shadow-md mb-4">
-      {editing ? (
-        <div>
-          <div className="mb-2">
-            <label className="block text-sm font-medium text-gray-700">Edit Start Date:</label>
-            <input
-              type="date"
-              className="mt-5 block w-32 pl-20 border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-300"
-              value={editedStartDate}
-              onChange={(e) => setEditedStartDate(e.target.value)}
-            />
-          </div>
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700">Edit End Date:</label>
-            <input
-              type="date"
-              className="mt-1 block w-32 pl-20 border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-300"
-              value={editedEndDate}
-              onChange={(e) => setEditedEndDate(e.target.value)}
-            />
-          </div>
-          <div className="flex space-x-2">
-            <button
-              className="px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600"
-              onClick={handleEditStartDate}
-            >
-              <MdSaveAs className="inline-block mr-1" />
-              Save
-            </button>
-            <button
-              className="px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600"
-              onClick={handleEditToggle}
-            >
-              <ImCancelCircle className="inline-block mr-1" />
-              Cancel
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <h3 className="text-lg font-semibold mb-2">{task.taskName}</h3>
-          <p className="mb-2">Start date: {task.startDate}</p>
-          <p className="mb-2">End date: {task.endDate}</p>
-          <div className="flex space-x-2">
-            <button
-              className="px-3 py-2 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600"
-              onClick={handleEditToggle}
-            >
-              <BsPencil className="inline-block mr-1" />
-              Edit
-            </button>
-            <button
-              className="px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600"
-              onClick={handleDelete}
-            >
-              <MdDelete className="inline-block mr-1" />
-              Delete
-            </button>
-          </div>
-        </div>
-      )}
-    </section>
-  );
+    return (
+        <section className="border rounded p-4 mb-4">
+            {isEditing ? (
+                <div className="space-y-2">
+                    <input
+                        type="text"
+                        name="taskName"
+                        value={editedTask.taskName}
+                        onChange={handleInputChange}
+                        className="border rounded p-2 w-full"
+                    />
+                    <input
+                        type="date"
+                        name="startDate"
+                        value={editedTask.startDate}
+                        onChange={handleInputChange}
+                        className="border rounded p-2"
+                    />
+                    <input
+                        type="date"
+                        name="endDate"
+                        value={editedTask.endDate}
+                        onChange={handleInputChange}
+                        className="border rounded p-2"
+                    />
+                    <select
+                        name="taskPriority"
+                        value={editedTask.taskPriority}
+                        onChange={handleInputChange}
+                        className="border rounded p-2 w-full"
+                    >
+                        <option value="low">Low</option>
+                        <option value="high">High</option>
+                    </select>
+                    <div className="flex space-x-2 mt-2">
+                        <button
+                            onClick={handleSaveClick}
+                            className="bg-blue-500 text-white px-4 py-2 rounded w-full hover:bg-blue-600"
+                        >
+                            <BsSaveFill />
+                        </button>
+                        <button
+                            onClick={handleCancelClick}
+                            className="bg-gray-400 text-white px-4 py-2 rounded w-full hover:bg-gray-500"
+                        >
+                            <GiCancel />
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <div className="space-y-2">
+                    <h3 className="text-lg font-semibold">{task.taskName}</h3>
+                    <p>Start date: {task.startDate}</p>
+                    <p>End date: {task.endDate}</p>
+                    <p>Priority: {task.taskPriority}</p>
+                    <div className="flex space-x-2">
+                        <button
+                            onClick={handleEditClick}
+                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        >
+                            <BsFillPencilFill />
+                        </button>
+                        <button
+                            onClick={handleDeleteClick}
+                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                        >
+                            <MdDelete />
+                        </button>
+                    </div>
+                </div>
+            )}
+        </section>
+    );
 }
